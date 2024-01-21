@@ -8,7 +8,8 @@
                 <div class="col-md-5">
                     <div class="card shadow border-0 p-5">
                         <h1 class="h3">Register</h1>
-                        <form id="form" name="form">
+                        <form id="form" name="form" method="POST" action="{{ route('account.store') }}">
+                            @csrf
                             <div class="mb-3">
                                 <label for="" class="mb-2">Name*</label>
                                 <input type="text" name="name" id="name" class="form-control"
@@ -45,30 +46,3 @@
     </section>
 @endsection
 
-@section('customJs')
-    <script>
-        $(document).ready(function() {
-            $('#form').submit(function(e) {
-                e.preventDefault();
-
-                $('button[type="submit"]').prop('disabled', true);
-                $.ajax({
-                    url: "{{ route('account.store') }}",
-                    type: "post",
-                    data: $(this).serializeArray(),
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.success) {
-                            $('button[type="submit"]').prop('disabled', true);
-                            window.location.href = response.redirect;
-                        }
-                    },
-                    error: function(err) {
-                        handle_error(err);
-                        $('button[type="submit"]').prop('disabled', false);
-                    }
-                });
-            });
-        });
-    </script>
-@endsection

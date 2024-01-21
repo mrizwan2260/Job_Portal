@@ -77,47 +77,13 @@
     <script src="{{ asset('assets/js/instantpages.5.1.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/lazyload.17.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/ajax.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    </script>
-    <script>
-        //Error handel function
-        function handle_error(data) {
-            var ids = get_all_ids();
-
-            //Remove error calss from all fields
-            for (var k in ids)
-                $('#' + k).removeClass('is-invalid')
-                .siblings('p')
-                .removeClass('invalid-feedback')
-                .html('');
-
-            //Add error class all fields
-            for (var key in data.responseJSON.errors)
-                $('#' + key).addClass('is-invalid')
-                .siblings('p')
-                .addClass('invalid-feedback')
-                .html(data.responseJSON.errors[key]);
-        }
-
-        //Get all fields ids
-        function get_all_ids() {
-            // Get all the inputs into an array...
-            var $inputs = $('#form :input');
-
-            // An array of just the ids...
-            var ids = {};
-
-            $inputs.each(function(index) {
-                ids[$(this).attr('name')] = $(this).attr('id');
-            });
-
-            return ids;
-        }
     </script>
     @yield('customJs')
 </body>

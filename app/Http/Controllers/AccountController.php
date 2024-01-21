@@ -23,6 +23,8 @@ class AccountController extends Controller
         $user->password     = Hash::make($request->password);
         $user->save();
 
+        // Set a success toast, with a title
+        toastr()->success('Data has been saved successfully!', 'Congrats');
         return response()->json([
             'success'       => true,
             'redirect'      => route('account.login')
