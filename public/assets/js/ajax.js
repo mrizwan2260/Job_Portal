@@ -47,8 +47,10 @@
                 data: $(this).serializeArray(),
                 dataType: 'json',
                 success: function(response) {
-                    if (response.success) {
+                    if (response.status == true) {
                         $('button[type="submit"]').prop('disabled', true);
+                        window.location.href = response.redirect;
+                    } else {
                         window.location.href = response.redirect;
                     }
                 },

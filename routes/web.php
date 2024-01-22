@@ -6,12 +6,15 @@ use Illuminate\Support\Facades\Route;
 
 
 //Home Routes
-Route::get('/', [HomeController::class,'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Account routes
 //Register routes
-Route::get('/register',[AccountController::class,'register'])->name('account.register');
-Route::post('/process-register',[AccountController::class,'store'])->name('account.store');
+Route::get('account/register', [AccountController::class, 'register'])->name('account.register');
+Route::post('account/process-register', [AccountController::class, 'store'])->name('account.store');
 
 //Login routes
-Route::get('/login',[AccountController::class,'login'])->name('account.login');
+Route::get('account/login', [AccountController::class, 'login'])->name('account.login');
+Route::post('account/authenticate', [AccountController::class, 'authenticate'])->name('account.authenticate');
+Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
+Route::get('account/logout', [AccountController::class, 'logout'])->name('account.logout');
